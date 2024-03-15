@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Timer</title>
+</head>
+<body>
+<div id="timer">00:00:00</div>
+
+
+<script>
+// Function to start the timer
+function startTimer() {
+  var seconds = 0;
+  var timerDisplay = document.getElementById("timer");
+
+  // Update timer every second
+  setInterval(function() {
+    seconds++;
+    var hours = Math.floor(seconds / 3600);
+    var minutes = Math.floor((seconds % 3600) / 60);
+    var secs = seconds % 60;
+
+    // Format the time display
+    var timeString = pad(hours) + ":" + pad(minutes) + ":" + pad(secs);
+
+    // Update the timer display
+    timerDisplay.innerText = timeString;
+  }, 1000); // Update every second
+
+  // Function to pad single digits with leading zeros
+  function pad(number) {
+    return (number <10 ? '0' : '') + number;
+  }
+}
+
+// Start the timer when the page loads
+window.onload = startTimer;
+</script>
+</body>
+</html>

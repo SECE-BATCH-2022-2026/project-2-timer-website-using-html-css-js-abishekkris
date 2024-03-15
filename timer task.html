@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Timer</title>
+  <style>
+        .div1{
+            width: 350px;
+            margin-left: 250px;
+            margin-top: 300px;
+            box-shadow: 10px 1cap;
+        }
+        .st{
+            font-size: 30px;
+            background-color: green;
+        }
+        .sp{
+            font-size: 30px;
+            background-color:red;
+        }
+  </style>
+</head>
+<body>
+    <div class="div1">
+        <h2 style="margin-left: 50px;">TIMER</h2>
+  <div id="timer" style="font-size: 40px;" >00H : 00M : 00S</div>
+  <button id="startButton" class="st" style="margin-left: 50px;">Start</button><br>
+  <button id="stopButton" class="sp" style="margin-left: 50px;">Stop</button>
+</div>
+  <script>
+    let timerInterval;
+    let hours = 0;
+    let minutes = 0;
+    let seconds = 0;
+
+    const timerDisplay = document.getElementById('timer');
+    const startButton = document.getElementById('startButton');
+    const stopButton = document.getElementById('stopButton');
+
+    function startTimer() {
+      timerInterval = setInterval(updateTimer, 1000);
+      startButton.disabled = true;
+    }
+
+    function stopTimer() {
+      clearInterval(timerInterval);
+      startButton.disabled = false;
+    }
+
+    function updateTimer() {
+      seconds++;
+      if (seconds >= 60) {
+        seconds = 0;
+        minutes++;
+        if (minutes >= 60) {
+          minutes = 0;
+          hours++;
+        }
+      }
+
+      const formattedTime = hours +'H :' + minutes +'M :' + seconds+'S';
+      timerDisplay.textContent = formattedTime;
+    }
+
+    function value() {
+      return (value < 10) ? '0' + value : value;
+    }
+
+    startButton.addEventListener('click', startTimer);
+    stopButton.addEventListener('click', stopTimer);
+  </script>
+</body>
+</html>
